@@ -1,0 +1,12 @@
+<h1 align="center"><%= "Hotel name" %></h1>
+<%= render 'about' %>
+<h2 align="center"><%= "Our rooms" %></h2>
+
+<% @rooms.each do |room| %>
+  
+  <%= image_tag room.image.url(:thumb) if room.image?%>
+
+<% end %>
+
+<%= "to see more about rooms click " %>
+<%= link_to 'HERE', rooms_path %>

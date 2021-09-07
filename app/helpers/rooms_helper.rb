@@ -1,0 +1,3 @@
+# RoomsHelper
+module RoomsHelper
+end

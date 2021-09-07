@@ -1,0 +1,24 @@
+
+
+<p>
+  <strong>Arrive:</strong>
+  <%= @booking.arrive %>
+</p>
+
+<p>
+  <strong>Departure:</strong>
+  <%= @booking.departure %>
+</p>
+
+<p>
+  <strong>Room:</strong>
+  <%= @booking.room.title %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @booking.user.email %>
+</p>
+
+<%= link_to 'Edit', edit_booking_path(@booking) %> |
+<%= link_to 'Back', bookings_path %>

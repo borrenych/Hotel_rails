@@ -1,0 +1,22 @@
+<h1>Reviews</h1>
+<%= link_to 'New Review', new_review_path %>
+  
+ 
+    <% @reviews.reverse_each do |review| %>
+      <% if review.verified == true %>
+        <h2><%= link_to review.title, review_path(review) %></h2>
+        <%= review.body %>
+        <p><%= "Created at: #{review.created_at} by #{review.name} #{review.user.email}" %></p>
+        <%= link_to 'Show', review %>
+        <% if current_user == review.user %>
+        | <%= link_to 'Destroy', review, method: :delete, data: { confirm: 'Are you sure?' } %>
+        <% end %>
+        <hr>
+      <% end %>
+    <% end %>
+ 
+
+
+<br>
+
+

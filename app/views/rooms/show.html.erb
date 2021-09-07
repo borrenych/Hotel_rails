@@ -1,0 +1,56 @@
+<h1 align="center"><%= @room.title %></h1>
+<h2 align="center"><%= @room.description %></h2>
+
+
+<% if @room.attachments? %>
+<ul>
+  <% @room.attachments.each do |attachment| %>
+    <%= link_to(image_tag(attachment.large.url, alt: 'Image'), attachment.url, target: '_blank') %>
+  <% end %>
+</ul>
+<% end %>
+
+
+
+<p align="center">
+  <strong>About:</strong>
+  <%= @room.body %>
+</p>
+
+<p>
+  <strong>Price:</strong>
+  <%= "#{@room.price} $/day" %>
+</p>
+
+<%= render 'bookings/form', booking: @booking %>
+
+
+
+<% bookings = Booking.where(room_id: @room) %>
+
+<% if bookings.count == 0 %>
+  <%= "You can book it for any day" %><br>
+  <% else %>
+    <%= "The room already booked for next days:"%><br>
+    <% bookings.each do |booking| %>
+      <% if current_user == booking.user %>
+        <% if booking.verified == true %>
+          <%= "The room has been successfully booked by you at this days: #{booking.arrive.to_date} to #{booking.departure.to_date}" %><br>
+        <% end %>
+        <% if booking.verified == false %>
+          <%= "Your booking from  #{booking.arrive.to_date} to #{booking.departure.to_date} has been canceled by the administrator." %><br>
+        <% end %>
+        <% if booking.verified == nil %>
+          <%= "Your booking request from #{booking.arrive.to_date} to #{booking.departure.to_date} is reviewed by the administrator. Please, check back later." %><br>
+        <% end %>
+      <% else %>
+        <% if booking.verified == true %>
+          <%= booking.arrive.to_date %>
+          <%= "do" %>
+          <%= booking.departure.to_date %><br>  
+        <% end %>
+      <% end %>
+    <% end %>
+<% end %>   
+
+<%= link_to 'Back', rooms_path %>

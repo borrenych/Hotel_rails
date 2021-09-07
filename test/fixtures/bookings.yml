@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  arrive: 2021-09-04 14:31:09
+  departure: 2021-09-04 14:31:09
+  room: one
+  user: one
+
+two:
+  arrive: 2021-09-04 14:31:09
+  departure: 2021-09-04 14:31:09
+  room: two
+  user: two

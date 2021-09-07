@@ -1,0 +1,3 @@
+# ReviewsHelper
+module ReviewsHelper
+end

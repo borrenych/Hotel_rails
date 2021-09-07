@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Hotel</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <%= link_to 'Home', root_path %>
+    <%= link_to 'Rooms', rooms_path %>
+    <%= link_to 'Reviews', reviews_path %>
+
+    
+    <%= render 'layouts/logging', style: 'float: right' %>
+
+    <% if current_user && current_user.admin? %>
+      <br>
+      <%= "admin menu:" %>
+      <%= link_to 'Rooms', admin_rooms_path %>
+      <%= link_to 'Reviews', admin_reviews_path %>
+      <%= link_to 'Bookings', admin_bookings_path %>
+      <%= link_to 'GET CSV FILE', admin_bookings_path(verified: true, format: :csv) %>
+
+    <% end %>
+
+    <hr>
+    <%= render 'layouts/alerts' %>
+    <%= yield %>
+  </body>
+</html>

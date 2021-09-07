@@ -1,0 +1,10 @@
+<h1 align="center">Rooms</h1>
+<% @rooms.sort.each do |room| %>
+  
+  <p align="center"><%= image_tag room.image.url(:thumb) if room.image?%></p>
+  <p align="center"><%= link_to room.title, room %></p>
+  <p align="center"><%= room.description %></p>
+  <p align="center"><%= "#{room.price} $/day" %></p>
+  <p align="center"><%= link_to 'Book Now', room %></p><br>
+<% end %>
+

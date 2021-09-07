@@ -1,0 +1,33 @@
+<h1>Reviews</h1>
+
+<% if @reviews.where(verified: true).count != @reviews.count %>
+
+  <h3><%= "THERE ARE SOME REVIEWS TO CHECK:" %></h3>
+    <% @reviews.reverse_each do |review| %>
+      <% if review.verified == nil %>
+        <h2><%= link_to review.title, admin_review_path(review) %></h2>
+        <%= review.body %>
+        <p><%= "Created at: #{review.created_at} by #{review.name} #{review.user.email}" %></p>
+        <%= link_to 'Show', admin_review_path(review) %>
+        <%= link_to 'Destroy', admin_review_path(review), method: :delete, data: { confirm: 'Are you sure?' } %>
+        <%= link_to 'Accept', accept_admin_review_path(review), method: :put %> 
+        <hr>
+      <% end %>
+  <% end %>
+<% else %>
+  <%= "No new reviews to check" %>
+<% end %>
+
+<h3><%= "ALREADY CHECKED REVIEWS:" %></h3>
+  <% @reviews.reverse_each do |review| %>
+    <% if review.verified == true %>
+      <h2><%= link_to review.title, admin_review_path(review) %></h2>
+      <%= review.body %>
+      <p><%= "Created at: #{review.created_at} by #{review.name} #{review.user.email}" %></p>
+      <%= link_to 'Show', admin_review_path(review) %>
+      <%= link_to 'Destroy', admin_review_path(review), method: :delete, data: { confirm: 'Are you sure?' } %>
+      <hr>
+    <% end %>
+  <% end %>
+
+
