@@ -1,7 +1,4 @@
-
-
 <h1>Bookings</h1>
-
 
 <table>
   <thead>
@@ -17,7 +14,7 @@
   </thead>
 
   <tbody>
-    <% @bookings.sort().reverse_each do |booking| %>
+    <% @bookings.each do |booking| %>
       <tr>
         <td><%= booking.room.title %></td>
         <td><%= booking.arrive %></td>
@@ -25,8 +22,6 @@
         <td><%= booking.user.email %></td>
         <td><%= booking.verified %></td>
         <td><%= booking.created_at %></td>
-
-        
         <td><%= link_to 'Accept', settrue_admin_booking_path(booking), method: :put %></td> 
         <td><%= link_to 'Dicline', setfalse_admin_booking_path(booking), method: :put %></td> 
         <td><%= link_to 'Destroy', admin_booking_path(booking), method: :delete, data: { confirm: 'Are you sure?' } %></td>

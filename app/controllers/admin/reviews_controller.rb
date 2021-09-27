@@ -1,12 +1,13 @@
 # Controller for Reviews at admin interface
 class Admin::ReviewsController < ApplicationController
   before_action :set_review, only: %i[show destroy]
-  # before_action :authenticate_user!, except: [:show, :index]
   before_action :admin_check
 
   # GET /reviews or /reviews.json
   def index
     @reviews = Review.all
+    @verified_reviews = @reviews.where(verified: true)
+    @not_verified_reviews = @reviews.where(verified: nil)
   end
 
   # GET /reviews/1 or /reviews/1.json

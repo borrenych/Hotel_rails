@@ -5,13 +5,11 @@ class Admin::BookingsController < ApplicationController
 
   # GET /bookings or /bookings.json
   def index
-    @bookings = Booking.all
-
-    respond_to do |format|
+    @bookings = Booking.order(created_at: :desc)
+      respond_to do |format|
       format.html
       format.csv do
-        send_data @bookings.to_csv,
-                  filename: 'bookings-#{Date.today}.csv'
+        send_data(@bookings.to_csv, filename: 'bookings-#{Date.today}.csv')
       end
     end
   end
